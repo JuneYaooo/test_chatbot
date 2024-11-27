@@ -192,8 +192,8 @@ with gr.Blocks(theme=small_and_beautiful_theme) as demo:
                     gr.Markdown("## "+i18n("工具箱"))
                     gr.HTML(get_html("close_btn.html").format(
                         obj="toolbox"), elem_classes="close-btn")
-                with gr.Tabs(elem_id="chuanhu-toolbox-tabs"):
-                    with gr.Tab(label=i18n("对话")):
+                with gr.Tabs(elem_id="chuanhu-toolbox-tabs", visible=False):
+                    with gr.Tab(label=i18n("对话"), visible=False):
                         with gr.Accordion(label=i18n("模型"), open=not HIDE_MY_KEY, visible=not HIDE_MY_KEY):
                             modelDescription = gr.Markdown(
                                 elem_id="gr-model-description",
@@ -263,7 +263,7 @@ with gr.Blocks(theme=small_and_beautiful_theme) as demo:
                             # TODO: 公式ocr
                             # formula_ocr = gr.Checkbox(label=i18n("识别公式"), value=advance_docs["pdf"].get("formula_ocr", False))
 
-                    with gr.Tab(label=i18n("参数")):
+                    with gr.Tab(label=i18n("参数"), visible=False):
                         gr.Markdown(i18n("# ⚠️ 务必谨慎更改 ⚠️"),
                                     elem_id="advanced-warning")
                         with gr.Accordion(i18n("参数"), open=True):
@@ -344,7 +344,7 @@ with gr.Blocks(theme=small_and_beautiful_theme) as demo:
                                 value=user_name.value,
                                 lines=1,
                             )
-                    with gr.Tab(label=i18n("拓展")):
+                    with gr.Tab(label=i18n("拓展"), visible=False):
                         gr.Markdown(
                             "Will be here soon...\n(We hope)\n\nAnd we hope you can help us to make more extensions!")
 

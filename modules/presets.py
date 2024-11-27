@@ -105,11 +105,11 @@ MODEL_METADATA = {
         "placeholder": {
             "logo": "file=web_assets/icon/any-icon-512.png",
             "logo_rounded": "false",
-            "slogan": i18n("literature_slogan"),
-            "question_1": i18n("literature_question_1"),
-            "question_2": i18n("literature_question_2"),
-            "question_3": i18n("literature_question_3"),
-            "question_4": i18n("literature_question_4"),
+            "slogan": i18n("论文小助手（查询，翻译，总结，对比，提问）"),
+            "question_1": i18n("帮我查询最近5年最有价值的肾小球炎研究论文"),
+            "question_2": i18n("根据查询的论文帮我比较第一篇和第三篇论文之间的差异"),
+            "question_3": i18n("根据查询的论文帮我翻译第5篇论文"),
+            "question_4": i18n("根据查询的论文帮我总结第3篇论文的结论"),
         }},
 }
 
