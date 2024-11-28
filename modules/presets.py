@@ -57,18 +57,18 @@ ONLINE_MODELS = [
 ]
 
 LOCAL_MODELS = [
-    "chatglm-6b",
-    "chatglm-6b-int4",
-    "chatglm-6b-int4-ge",
-    "chatglm2-6b",
-    "chatglm2-6b-int4",
-    "chatglm3-6b",
-    "chatglm3-6b-32k",
-    "StableLM",
-    "MOSS",
-    "Llama-2-7B-Chat",
-    "Qwen 7B",
-    "Qwen 14B"
+    # "chatglm-6b",
+    # "chatglm-6b-int4",
+    # "chatglm-6b-int4-ge",
+    # "chatglm2-6b",
+    # "chatglm2-6b-int4",
+    # "chatglm3-6b",
+    # "chatglm3-6b-32k",
+    # "StableLM",
+    # "MOSS",
+    # "Llama-2-7B-Chat",
+    # "Qwen 7B",
+    # "Qwen 14B"
 ]
 
 DEFAULT_METADATA = {
@@ -103,7 +103,7 @@ MODEL_METADATA = {
     "论文助手":{"model_name": "论文助手",
         "description": i18n("literature_description"),
         "placeholder": {
-            "logo": "file=web_assets/icon/any-icon-512.png",
+            "logo": "file=web_assets/model_logos/thesis_logo.png",
             "logo_rounded": "false",
             "slogan": i18n("论文小助手（查询，翻译，总结，对比，提问）"),
             "question_1": i18n("帮我查询最近5年最有价值的肾小球炎研究论文"),

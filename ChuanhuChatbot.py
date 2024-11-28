@@ -111,7 +111,7 @@ with gr.Blocks(theme=small_and_beautiful_theme) as demo:
                 # gr.HTML(get_html("footer.html").format(versions=versions_html()), elem_id="footer")
                 # gr.Markdown(CHUANHU_DESCRIPTION, elem_id="chuanhu-author")
 
-        with gr.Column(elem_id="chuanhu-area", scale=5):
+        with gr.Column(elem_id="chuanhu-area", scale=6):
             with gr.Column(elem_id="chatbot-area"):
                 with gr.Row(elem_id="chatbot-header"):
                     model_select_dropdown = gr.Dropdown(
@@ -185,7 +185,7 @@ with gr.Blocks(theme=small_and_beautiful_theme) as demo:
                                     dislikeBtn = gr.Button(
                                         "👎", elem_id="gr-dislike-btn")
 
-        with gr.Column(elem_id="toolbox-area", scale=1):
+        with gr.Column(elem_id="toolbox-area", scale=0):
             # For CSS setting, there is an extra box. Don't remove it.
             with gr.Group(elem_id="chuanhu-toolbox"):
                 with gr.Row():
