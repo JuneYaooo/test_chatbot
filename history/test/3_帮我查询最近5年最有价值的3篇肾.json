@@ -1,0 +1,45 @@
+{
+    "system": "You are a literature agent that helps users analyze and understand paper works. \n        You can provide insights on papers",
+    "history": [
+        {
+            "role": "user",
+            "content": "帮我查询最近5年最有价值的3篇肾小球炎研究论文"
+        },
+        {
+            "role": "assistant",
+            "content": "## 文献搜索结果\n\n共找到 10472 篇相关文献，以下是前 3 篇文献的详细信息：\n\n### 1. Glomerulonephritis: immunopathogenesis and immunotherapy.\n\n**作者**: Anders, Hans-Joachim, Kitching, A Richard, Leung, Nelson, Romagnani, Paola\n\n**期刊**: Nature reviews. Immunology\n\n**发表时间**: 2023\n\n**DOI**: 10.1038/s41577-022-00816-y\n\n**摘要**: 'Glomerulonephritis' (GN) is a term used to describe a group of heterogeneous immune-mediated disorders characterized by inflammation of the filtration units of the kidney (the glomeruli). These disorders are currently classified largely on the basis of histopathological lesion patterns, but these patterns do not align well with their diverse pathological mechanisms and hence do not inform optimal therapy. Instead, we propose grouping GN disorders into five categories according to their immunopathogenesis: infection-related GN, autoimmune GN, alloimmune GN, autoinflammatory GN and monoclonal gammopathy-related GN. This categorization can inform the appropriate treatment; for example, infection control for infection-related GN, suppression of adaptive immunity for autoimmune GN and alloimmune GN, inhibition of single cytokines or complement factors for autoinflammatory GN arising from inborn errors in innate immunity, and plasma cell clone-directed or B cell clone-directed therapy for monoclonal gammopathies. Here we present the immunopathogenesis of GN and immunotherapies in use and in development and discuss how an immunopathogenesis-based GN classification can focus research, and improve patient management and teaching.\n\n---\n\n### 2. IgA Nephropathy: An Interesting Autoimmune Kidney Disease.\n\n**作者**: Rajasekaran, Arun, Julian, Bruce A, Rizk, Dana V\n\n**期刊**: The American journal of the medical sciences\n\n**发表时间**: 2021\n\n**DOI**: 10.1016/j.amjms.2020.10.003\n\n**摘要**: Immunoglobulin A nephropathy (IgAN) is the most common primary glomerulonephritis worldwide. It is a leading cause of chronic kidney disease and progresses to end-stage kidney disease in up to 40% of patients about 20 years after diagnosis. Additionally, IgAN is associated with significant mortality. The diagnosis currently necessitates a kidney biopsy, as no biomarker sufficiently specific and sensitive is available to supplant the procedure. Patients display significant heterogeneity in the epidemiology, clinical manifestations, renal progression, and long-term outcomes across diverse racial and ethnic populations. Recent advances in understanding the underlying pathophysiology of the disease have led to the proposal of a four-hit hypothesis supporting an autoimmune process. To date, there is no disease-specific treatment but, with a better understanding of the disease pathogenesis, new therapeutic approaches are currently being tested in clinical trials. In this review, we examine the multiple facets and most recent advances of this interesting disease.\n\n---\n\n### 3. Nephritic Syndrome.\n\n**作者**: Lamba, Perola, Nam, Ki Heon, Contractor, Jigar, Kim, Aram\n\n**期刊**: Primary care\n\n**发表时间**: 2020\n\n**DOI**: 10.1016/j.pop.2020.08.003\n\n**摘要**: Nephritic syndrome is a constellation of hematuria, proteinuria, hypertension, and in some cases acute kidney injury and fluid retention characteristic of acute glomerulonephritis. Infection-related glomerulonephritis, IgA nephropathy, lupus nephritis, membranoproliferative glomerulonephritis, and antineutrophil cytoplasmic antibody-associated vasculitis are the most common diseases in nephritic syndrome that primary care physicians might encounter in practice such that a solid comprehension of these can lead to earlier detection. This article describes the pathophysiology, incidence, clinical presentation, treatment, and disease progression of these nephritic syndrome entities, and provides guidance for when to refer to a nephrologist.\n\n---\n\n"
+        },
+        {
+            "role": "user",
+            "content": "这几个方法的区别是啥"
+        },
+        {
+            "role": "assistant",
+            "content": null
+        }
+    ],
+    "chatbot": [
+        [
+            "帮我查询最近5年最有价值的3篇肾小球炎研究论文",
+            "## 文献搜索结果\n\n共找到 10472 篇相关文献，以下是前 3 篇文献的详细信息：\n\n### 1. Glomerulonephritis: immunopathogenesis and immunotherapy.\n\n**作者**: Anders, Hans-Joachim, Kitching, A Richard, Leung, Nelson, Romagnani, Paola\n\n**期刊**: Nature reviews. Immunology\n\n**发表时间**: 2023\n\n**DOI**: 10.1038/s41577-022-00816-y\n\n**摘要**: 'Glomerulonephritis' (GN) is a term used to describe a group of heterogeneous immune-mediated disorders characterized by inflammation of the filtration units of the kidney (the glomeruli). These disorders are currently classified largely on the basis of histopathological lesion patterns, but these patterns do not align well with their diverse pathological mechanisms and hence do not inform optimal therapy. Instead, we propose grouping GN disorders into five categories according to their immunopathogenesis: infection-related GN, autoimmune GN, alloimmune GN, autoinflammatory GN and monoclonal gammopathy-related GN. This categorization can inform the appropriate treatment; for example, infection control for infection-related GN, suppression of adaptive immunity for autoimmune GN and alloimmune GN, inhibition of single cytokines or complement factors for autoinflammatory GN arising from inborn errors in innate immunity, and plasma cell clone-directed or B cell clone-directed therapy for monoclonal gammopathies. Here we present the immunopathogenesis of GN and immunotherapies in use and in development and discuss how an immunopathogenesis-based GN classification can focus research, and improve patient management and teaching.\n\n---\n\n### 2. IgA Nephropathy: An Interesting Autoimmune Kidney Disease.\n\n**作者**: Rajasekaran, Arun, Julian, Bruce A, Rizk, Dana V\n\n**期刊**: The American journal of the medical sciences\n\n**发表时间**: 2021\n\n**DOI**: 10.1016/j.amjms.2020.10.003\n\n**摘要**: Immunoglobulin A nephropathy (IgAN) is the most common primary glomerulonephritis worldwide. It is a leading cause of chronic kidney disease and progresses to end-stage kidney disease in up to 40% of patients about 20 years after diagnosis. Additionally, IgAN is associated with significant mortality. The diagnosis currently necessitates a kidney biopsy, as no biomarker sufficiently specific and sensitive is available to supplant the procedure. Patients display significant heterogeneity in the epidemiology, clinical manifestations, renal progression, and long-term outcomes across diverse racial and ethnic populations. Recent advances in understanding the underlying pathophysiology of the disease have led to the proposal of a four-hit hypothesis supporting an autoimmune process. To date, there is no disease-specific treatment but, with a better understanding of the disease pathogenesis, new therapeutic approaches are currently being tested in clinical trials. In this review, we examine the multiple facets and most recent advances of this interesting disease.\n\n---\n\n### 3. Nephritic Syndrome.\n\n**作者**: Lamba, Perola, Nam, Ki Heon, Contractor, Jigar, Kim, Aram\n\n**期刊**: Primary care\n\n**发表时间**: 2020\n\n**DOI**: 10.1016/j.pop.2020.08.003\n\n**摘要**: Nephritic syndrome is a constellation of hematuria, proteinuria, hypertension, and in some cases acute kidney injury and fluid retention characteristic of acute glomerulonephritis. Infection-related glomerulonephritis, IgA nephropathy, lupus nephritis, membranoproliferative glomerulonephritis, and antineutrophil cytoplasmic antibody-associated vasculitis are the most common diseases in nephritic syndrome that primary care physicians might encounter in practice such that a solid comprehension of these can lead to earlier detection. This article describes the pathophysiology, incidence, clinical presentation, treatment, and disease progression of these nephritic syndrome entities, and provides guidance for when to refer to a nephrologist.\n\n---\n\n"
+        ],
+        [
+            "这几个方法的区别是啥",
+            null
+        ]
+    ],
+    "model_name": "论文助手",
+    "single_turn": false,
+    "temperature": 1.0,
+    "top_p": 1.0,
+    "n_choices": 1,
+    "stop_sequence": [],
+    "token_upper_limit": 4096,
+    "max_generation_token": null,
+    "presence_penalty": 0.0,
+    "frequency_penalty": 0.0,
+    "logit_bias": null,
+    "user_identifier": "test",
+    "stream": false,
+    "metadata": {}
+}

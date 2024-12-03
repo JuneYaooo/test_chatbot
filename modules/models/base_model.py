@@ -869,6 +869,7 @@ class BaseLLMModel:
         self.auto_save()
 
     def set_streaming(self, new_streaming):
+        print("set_streaming",set_streaming)
         self.stream = new_streaming
         self.auto_save()
 

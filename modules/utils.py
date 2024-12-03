@@ -39,6 +39,7 @@ if TYPE_CHECKING:
 
 
 def predict(current_model, *args):
+    print("predict args",*args)
     iter = current_model.predict(*args)
     for i in iter:
         yield i

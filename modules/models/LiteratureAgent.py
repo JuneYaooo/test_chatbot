@@ -7,9 +7,10 @@ import traceback
 from ..utils import *
 from ..presets import *
 from .base_model import BaseLLMModel
+import time
 
 class LiteratureAgent_Client(BaseLLMModel):
-    def __init__(self, model_name, api_key, user_name="", base_url="http://209.97.149.43:8000") -> None:
+    def __init__(self, model_name, api_key, user_name="", base_url="http://localhost:6666:6666") -> None:
         super().__init__(model_name=model_name, user=user_name, config={"api_key": api_key})
         self.base_url = base_url
         self.session_id = None
@@ -27,6 +28,7 @@ class LiteratureAgent_Client(BaseLLMModel):
         return messages
 
     def _make_api_call(self, messages, stream=False):
+        print("_make_api_call stream",stream)
         url = f"{self.base_url}/v1/chat/completions"
         stream = False
         print("_make_api_call messages",messages)
@@ -44,15 +46,19 @@ class LiteratureAgent_Client(BaseLLMModel):
             }
 
         try:
-            print("_make_api_call payload:", payload)
+            start_time = time.time()
+            # print("_make_api_call payload:", payload)
             response = requests.post(url, json=payload, timeout=300)
-            print("_make_api_call Response:", response.json())
+            # print("_make_api_call Response:", response.json())
             response.raise_for_status()
             data = response.json()
             
             if not self.session_id:
                 self.session_id = data.get("id", "").replace("lit-", "")
             
+            end_time = time.time()
+            cost_time = end_time - start_time
+            print(f"API call took {cost_time:.2f} seconds")
             return data.get("content") or data.get("response") or data.get("choices")[0]['message']['content']
         except Exception as e:
             logging.error(f"API call failed: {str(e)}")
