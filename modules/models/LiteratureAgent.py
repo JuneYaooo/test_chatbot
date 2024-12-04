@@ -10,9 +10,11 @@ from .base_model import BaseLLMModel
 import time
 
 class LiteratureAgent_Client(BaseLLMModel):
-    def __init__(self, model_name, api_key, user_name="", base_url="http://localhost:6666:6666") -> None:
+    # 209.97.149.43/localhost
+    def __init__(self, model_name, api_key, user_name="", base_url="http://209.97.149.43:6666") -> None:
         super().__init__(model_name=model_name, user=user_name, config={"api_key": api_key})
         self.base_url = base_url
+        print("self.base_url",self.base_url)
         self.session_id = None
         self.history = []
         self.system_prompt = """You are a literature agent that helps users analyze and understand paper works. 

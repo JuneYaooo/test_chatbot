@@ -1,11 +1,15 @@
 {
-    "openai_api_key": "sk-xlmyeGEmJfkwQEXC772bFaD41e3f486289Ed926998D321Dbsk-xlmyeGEmJfkwQEXC772bFaD41e3f486289Ed926998D321Dbsk-xlmyeGEmJfkwQEXC772bFaD41e3f486289Ed926998D321Dbsk-xlmyeGEmJfkwQEXC772bFaD41e3f486289Ed926998sk-xlmyeGEmJfkwQEXC772bFaD41e3f486289Ed926998D321Db",
+    "openai_api_key": "sk-xlmyeGEmJfkwQEXC772bFaD41e3f486289Ed926998D321Db",
     "openai_api_base": "https://gitaigc.com/v1",
-    "local_embedding": true,
+    "local_embedding": false,
     "midjourney_temp_folder": "files",
     "users": [
         [
             "test",
+            "1234"
+        ],
+        [
+            "test1",
             "1234"
         ],
         [
@@ -21,9 +25,11 @@
             "1234"
         ]
     ],
-    "check_update": true,
+    "check_update": false,
     "default_model": "论文助手",
     "hide_history_when_not_logged_in": true,
+    "autobrowser": false,
+    "share": false,
     "bot_avatar": "",
     "user_avatar": "",
     "server_name": "0.0.0.0"
