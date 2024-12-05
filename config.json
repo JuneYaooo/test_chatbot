@@ -28,7 +28,7 @@
     "check_update": false,
     "default_model": "论文助手",
     "hide_history_when_not_logged_in": true,
-    "autobrowser": true,
+    "autobrowser": false,
     "share": false,
     "bot_avatar": "",
     "user_avatar": "",
