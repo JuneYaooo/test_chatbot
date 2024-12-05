@@ -3,12 +3,16 @@
     "history": [
         {
             "role": "user",
-            "content": "慢性阻塞性肺疾病（COPD）患者的生活质量如何改善？"
+            "content": "不同新冠疫苗接种后的免疫应答和保护效果有何差异？"
+        },
+        {
+            "role": "assistant",
+            "content": null
         }
     ],
     "chatbot": [
         [
-            "慢性阻塞性肺疾病（COPD）患者的生活质量如何改善？",
+            "不同新冠疫苗接种后的免疫应答和保护效果有何差异？",
             null
         ]
     ],
@@ -24,6 +28,6 @@
     "frequency_penalty": 0.0,
     "logit_bias": null,
     "user_identifier": "test",
-    "stream": true,
+    "stream": false,
     "metadata": {}
 }
