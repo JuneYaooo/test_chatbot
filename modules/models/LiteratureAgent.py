@@ -53,8 +53,11 @@ class LiteratureAgent_Client(BaseLLMModel):
             response.raise_for_status()
             
             if stream:
-                # 对于流式响应，直接返回响应对象
-                return response
+                if response.status_code == 200:
+                    return response
+                else:
+                    logging.error(f"Stream API call failed with status code: {response.status_code}")
+                    return None
                 
             data = response.json()
             
@@ -191,11 +194,28 @@ class LiteratureAgent_Client(BaseLLMModel):
             print("response",response)
             
             if self.stream:
-                partial_text = ""
-                for chunk in response.split():
-                    partial_text += chunk + " "
-                    chatbot[-1] = (display_input, partial_text)
+                if response is None:
+                    error_message = "Failed to get streaming response from API"
+                    chatbot[-1] = (display_input, error_message)
                     yield chatbot, status_text
+                else:
+                    partial_text = ""
+                    for line in response.iter_lines():
+                        if line:
+                            try:
+                                data = json.loads(line.decode('utf-8'))
+                                if 'choices' in data and len(data['choices']) > 0:
+                                    if 'delta' in data['choices'][0]:
+                                        content = data['choices'][0]['delta'].get('content', '')
+                                    else:
+                                        content = data['choices'][0]['message'].get('content', '')
+                                    
+                                    if content:
+                                        partial_text += content
+                                        chatbot[-1] = (display_input, partial_text)
+                                        yield chatbot, status_text
+                            except json.JSONDecodeError:
+                                continue
             else:
                 # 从响应对象中提取实际的内容文本
                 response_text = response.get('content') if isinstance(response, dict) else response
