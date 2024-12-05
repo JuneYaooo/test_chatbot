@@ -30,12 +30,12 @@ class LiteratureAgent_Client(BaseLLMModel):
         return messages
 
     def _make_api_call(self, messages, stream=False):
-        print("_make_api_call stream",stream)
+        print("_make_api_call stream", stream)
         url = f"{self.base_url}/v1/chat/completions"
-        stream = False
-        print("_make_api_call messages",messages)
-        print('self.session_id',self.session_id)
-        print('stream',stream)
+        print("_make_api_call messages", messages)
+        print('self.session_id', self.session_id)
+        print('stream', stream)
+
         if self.session_id:
             url = f"{url}/{self.session_id}/continue"
             payload = messages[-1]  # 只发送最后一条消息用于继续对话
@@ -49,10 +49,13 @@ class LiteratureAgent_Client(BaseLLMModel):
 
         try:
             start_time = time.time()
-            # print("_make_api_call payload:", payload)
             response = requests.post(url, json=payload, timeout=300)
-            # print("_make_api_call Response:", response.json())
             response.raise_for_status()
+            
+            if stream:
+                # 对于流式响应，直接返回响应对象
+                return response
+                
             data = response.json()
             
             if not self.session_id:
@@ -61,7 +64,13 @@ class LiteratureAgent_Client(BaseLLMModel):
             end_time = time.time()
             cost_time = end_time - start_time
             print(f"API call took {cost_time:.2f} seconds")
-            return data.get("content") or data.get("response") or data.get("choices")[0]['message']['content']
+            
+            # 处理非流式响应
+            res = data.get("content") or data.get("response") or data.get("choices")[0]['message']['content']
+            if isinstance(res, dict) and "content" in res:
+                res = res["content"]
+            return res
+            
         except Exception as e:
             logging.error(f"API call failed: {str(e)}")
             return None
@@ -84,9 +93,23 @@ class LiteratureAgent_Client(BaseLLMModel):
         try:
             response = self._make_api_call(messages, stream=True)
             if response:
-                for chunk in response.split():
-                    partial_text += chunk + " "
-                    yield partial_text
+                # 处理SSE流式响应
+                for line in response.iter_lines():
+                    if line:
+                        try:
+                            # 解析 SSE 数据
+                            data = json.loads(line.decode('utf-8'))
+                            if 'choices' in data and len(data['choices']) > 0:
+                                if 'delta' in data['choices'][0]:
+                                    content = data['choices'][0]['delta'].get('content', '')
+                                else:
+                                    content = data['choices'][0]['message'].get('content', '')
+                                
+                                if content:
+                                    partial_text += content
+                                    yield partial_text
+                        except json.JSONDecodeError:
+                            continue
             else:
                 yield "Unable to generate response"
         except Exception as e:
@@ -174,7 +197,9 @@ class LiteratureAgent_Client(BaseLLMModel):
                     chatbot[-1] = (display_input, partial_text)
                     yield chatbot, status_text
             else:
-                chatbot[-1] = (display_input, response)
+                # 从响应对象中提取实际的内容文本
+                response_text = response.get('content') if isinstance(response, dict) else response
+                chatbot[-1] = (display_input, response_text)
                 yield chatbot, status_text
 
             # 添加助手回复到历史记录
