@@ -47,33 +47,33 @@ class LiteratureAgent_Client(BaseLLMModel):
                 "session_id": None
             }
 
+        headers = {
+            "Content-Type": "application/json"
+        }
+
         try:
             start_time = time.time()
-            response = requests.post(url, json=payload, timeout=300)
+            response = requests.post(url, json=payload, headers=headers, stream=stream, timeout=300)
             response.raise_for_status()
-            
-            if stream:
-                if response.status_code == 200:
-                    return response
-                else:
-                    logging.error(f"Stream API call failed with status code: {response.status_code}")
-                    return None
-                
-            data = response.json()
-            
-            if not self.session_id:
-                self.session_id = data.get("id", "").replace("lit-", "")
             
             end_time = time.time()
             cost_time = end_time - start_time
             print(f"API call took {cost_time:.2f} seconds")
             
-            # 处理非流式响应
-            res = data.get("content") or data.get("response") or data.get("choices")[0]['message']['content']
-            if isinstance(res, dict) and "content" in res:
-                res = res["content"]
-            return res
-            
+            if stream:
+                return response
+            else:
+                data = response.json()
+                
+                if not self.session_id:
+                    self.session_id = data.get("id", "").replace("lit-", "")
+                
+                # 处理非流式响应
+                res = data.get("content") or data.get("response") or data.get("choices")[0]['message']['content']
+                if isinstance(res, dict) and "content" in res:
+                    res = res["content"]
+                return res
+                
         except Exception as e:
             logging.error(f"API call failed: {str(e)}")
             return None
@@ -89,35 +89,6 @@ class LiteratureAgent_Client(BaseLLMModel):
         except Exception as e:
             logging.error(f"Error in LiteratureAgent: {str(e)}")
             return f"An error occurred: {str(e)}", 0
-
-    def get_answer_stream_iter(self):
-        messages = self._get_literature_style_input()
-        partial_text = ""
-        try:
-            response = self._make_api_call(messages, stream=True)
-            if response:
-                # 处理SSE流式响应
-                for line in response.iter_lines():
-                    if line:
-                        try:
-                            # 解析 SSE 数据
-                            data = json.loads(line.decode('utf-8'))
-                            if 'choices' in data and len(data['choices']) > 0:
-                                if 'delta' in data['choices'][0]:
-                                    content = data['choices'][0]['delta'].get('content', '')
-                                else:
-                                    content = data['choices'][0]['message'].get('content', '')
-                                
-                                if content:
-                                    partial_text += content
-                                    yield partial_text
-                        except json.JSONDecodeError:
-                            continue
-            else:
-                yield "Unable to generate response"
-        except Exception as e:
-            logging.error(f"Error in streaming response: {str(e)}")
-            yield f"An error occurred: {str(e)}"
 
     def to_markdown(self, text):
         text = text.replace("•", "  *")
@@ -191,7 +162,7 @@ class LiteratureAgent_Client(BaseLLMModel):
             # 使用 LiteratureAgent 的 API 调用逻辑
             messages = self._get_literature_style_input()
             response = self._make_api_call(messages, stream=self.stream)
-            print("response",response)
+            print("response", response)
             
             if self.stream:
                 if response is None:
@@ -203,18 +174,31 @@ class LiteratureAgent_Client(BaseLLMModel):
                     for line in response.iter_lines():
                         if line:
                             try:
-                                data = json.loads(line.decode('utf-8'))
-                                if 'choices' in data and len(data['choices']) > 0:
-                                    if 'delta' in data['choices'][0]:
-                                        content = data['choices'][0]['delta'].get('content', '')
-                                    else:
-                                        content = data['choices'][0]['message'].get('content', '')
+                                decoded_line = line.decode('utf-8')
+                                print("decoded_line",decoded_line)
+                                if decoded_line.startswith('data: '):
+                                    # 移除 'data: ' 前缀
+                                    json_str = decoded_line.replace('data: ', '', 1).strip()
+                                    if json_str == '[DONE]':
+                                        break
+                                    if not json_str:
+                                        continue  # 跳过空行
                                     
-                                    if content:
-                                        partial_text += content
-                                        chatbot[-1] = (display_input, partial_text)
-                                        yield chatbot, status_text
-                            except json.JSONDecodeError:
+                                    try:
+                                        data = json.loads(json_str)  # 使用标准 json 解析
+                                        if 'choices' in data and len(data['choices']) > 0:
+                                            delta = data['choices'][0].get('delta', {})
+                                            content = delta.get('content', '')
+                                            if content:
+                                                partial_text += content
+                                                print("partial_text", partial_text)
+                                                chatbot[-1] = (display_input, partial_text)
+                                                yield chatbot, status_text
+                                    except json.JSONDecodeError as e:
+                                        logging.error(f"JSON 解析错误: {str(e)}")
+                                        continue
+                            except Exception as e:
+                                logging.error(f"处理行时出错: {str(e)}")
                                 continue
             else:
                 # 从响应对象中提取实际的内容文本
@@ -225,6 +209,10 @@ class LiteratureAgent_Client(BaseLLMModel):
             # 添加助手回复到历史记录
             self.history.append({"role": "assistant", "content": response})
             
+        except json.JSONDecodeError as e:
+            logging.error(f"JSON 解析错误: {str(e)}")
+            status_text = "JSON 格式错误，请检查响应内容。"
+            yield chatbot, status_text
         except Exception as e:
             traceback.print_exc()
             status_text = STANDARD_ERROR_MSG + beautify_err_msg(str(e))
