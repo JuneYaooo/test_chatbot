@@ -175,7 +175,7 @@ class LiteratureAgent_Client(BaseLLMModel):
                         if line:
                             try:
                                 decoded_line = line.decode('utf-8')
-                                print("decoded_line",decoded_line)
+                                # print("decoded_line",decoded_line)
                                 if decoded_line.startswith('data: '):
                                     # 移除 'data: ' 前缀
                                     json_str = decoded_line.replace('data: ', '', 1).strip()
@@ -191,7 +191,7 @@ class LiteratureAgent_Client(BaseLLMModel):
                                             content = delta.get('content', '')
                                             if content:
                                                 partial_text += content
-                                                print("partial_text", partial_text)
+                                                # print("partial_text", partial_text)
                                                 chatbot[-1] = (display_input, partial_text)
                                                 yield chatbot, status_text
                                     except json.JSONDecodeError as e:
