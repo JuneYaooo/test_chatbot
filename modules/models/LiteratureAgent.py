@@ -200,14 +200,15 @@ class LiteratureAgent_Client(BaseLLMModel):
                             except Exception as e:
                                 logging.error(f"处理行时出错: {str(e)}")
                                 continue
+                self.history.append({"role": "assistant", "content": partial_text})
             else:
                 # 从响应对象中提取实际的内容文本
                 response_text = response.get('content') if isinstance(response, dict) else response
                 chatbot[-1] = (display_input, response_text)
                 yield chatbot, status_text
 
-            # 添加助手回复到历史记录
-            self.history.append({"role": "assistant", "content": response})
+                # 添加助手回复到历史记录
+                self.history.append({"role": "assistant", "content": response_text})
             
         except json.JSONDecodeError as e:
             logging.error(f"JSON 解析错误: {str(e)}")
