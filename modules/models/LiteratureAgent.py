@@ -37,7 +37,7 @@ class LiteratureAgent_Client(BaseLLMModel):
         print('stream', stream)
 
         if self.session_id:
-            url = f"{url}/{self.session_id}/continue"
+            # url = f"{url}/{self.session_id}/continue"
             payload = messages[-1]  # 只发送最后一条消息用于继续对话
         else:
             payload = {
