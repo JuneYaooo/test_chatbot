@@ -169,8 +169,9 @@ class LiteratureAgent_Client(BaseLLMModel):
                     error_message = "Failed to get streaming response from API"
                     chatbot[-1] = (display_input, error_message)
                     yield chatbot, status_text
+                    partial_text = "服务器无响应"  # Initialize partial_text to avoid UnboundLocalError
                 else:
-                    partial_text = ""
+                    partial_text = ""  # Initialize partial_text
                     for line in response.iter_lines():
                         if line:
                             try:
@@ -210,7 +211,7 @@ class LiteratureAgent_Client(BaseLLMModel):
                 # 添加助手回复到历史记录
                 self.history.append({"role": "assistant", "content": response_text})
             
-        except json.JSONDecodeError as e:
+        except json.JSONDecodeError as e:  # Use json.JSONDecodeError instead of commentjson
             logging.error(f"JSON 解析错误: {str(e)}")
             status_text = "JSON 格式错误，请检查响应内容。"
             yield chatbot, status_text
